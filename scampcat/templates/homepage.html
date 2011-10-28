@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} | Annotation Tool{% endblock %}
+{% block body_classes %}wide homepage{% endblock %}
+
+{% block content %}
+    <h1>ScampCat</h1>
+    <h2>Annotate, then share your images..</h2>
+    {% if form.non_field_errors %}
+        <ul class="messages">
+            {% for error in form.non_field_errors %}
+                <li class="danger">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form class="upload" method="POST" action="" enctype="multipart/form-data">
+        <div class="field">
+            <label for="id_image">Upload:</label>            
+            {{ form.image }}
+        </div>
+        <div class="field last">
+            <label for="id_url">or link:</label>            
+
+            <div class="input">
+              <div class="input-prepend">
+                <span class="add-on">URL</span>
+                {{ form.url }}
+              </div>
+            </div>
+
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="custom go">Submit</button>
+    </form>
+{% endblock %}

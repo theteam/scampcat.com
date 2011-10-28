@@ -1,0 +1,13 @@
+<p>Here is a cat picture instead!</p>
+
+{% if object %}
+<a href="{{ object.url }}" title="{{ object.title }}">
+<img src="{{ object.image }}"  alt="" />
+</a>
+<p>{{ object.title}} from <a href="{{ object.url }}">{{ object.owner }}</a></p>
+Thanks to <a href="http://pipes.yahoo.com/pipes/">Yahoo pipes</a> and <a href="http://www.flickr.com/">Flickr</a>
+{% else %}
+<img src="{{ STATIC_URL }}images/cats-computer-blue-screen-death.jpg" alt="" />
+
+<p>From <a href="http://icanhascheezburger.com/">http://icanhascheezburger.com/</a></p>
+{% endif %}

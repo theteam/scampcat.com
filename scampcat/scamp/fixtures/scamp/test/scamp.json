@@ -1,0 +1,138 @@
+[
+    {
+        "pk": 2, 
+        "model": "scamp.scamp", 
+        "fields": {
+            "_description_rendered": "<p>This is a test scamp.</p>", 
+            "description": "This is a test scamp.", 
+            "title": "Anonymous Test Scamp", 
+            "image": 1, 
+            "created": "2011-07-08 16:11:30", 
+            "modified": "2011-07-11 14:16:43", 
+            "user": null, 
+            "key": "u1cvxfz4ly8jszf6vbb5yawsckksswxq", 
+            "slug": "c"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "scamp.scamp", 
+        "fields": {
+            "_description_rendered": "<p>This is a test scamp.</p>", 
+            "description": "This is a test scamp.", 
+            "title": "Test Scamp", 
+            "image": 1, 
+            "created": "2011-07-08 16:11:14", 
+            "modified": "2011-07-11 17:30:08", 
+            "user": 1, 
+            "key": "00daf6uwe80fwy8e5insf3ui4rzq5wda", 
+            "slug": "b"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-11 12:23:31", 
+            "url": "", 
+            "image": "scamp-images/169ba7042183c4db4c689491c703934c.jpg", 
+            "modified": "2011-07-11 12:23:31", 
+            "height": 310, 
+            "width": 320, 
+            "url_key": "169ba7042183c4db4c689491c703934c"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-11 12:22:20", 
+            "url": "", 
+            "image": "scamp-images/0da7b9ffd3c39e1959bfe8eb9c0584c9.jpg", 
+            "modified": "2011-07-11 12:22:21", 
+            "height": 310, 
+            "width": 320, 
+            "url_key": "0da7b9ffd3c39e1959bfe8eb9c0584c9"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-11 12:22:12", 
+            "url": "", 
+            "image": "scamp-images/322e4b45ce7385c549e14c7a3aa13990.jpg", 
+            "modified": "2011-07-11 12:22:12", 
+            "height": 310, 
+            "width": 320, 
+            "url_key": "322e4b45ce7385c549e14c7a3aa13990"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-08 17:36:45", 
+            "url": "", 
+            "image": "scamp-images/854dbc419bdffe045efd57ae16c03d91.jpg", 
+            "modified": "2011-07-08 17:36:45", 
+            "height": 310, 
+            "width": 320, 
+            "url_key": "854dbc419bdffe045efd57ae16c03d91"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-08 16:13:02", 
+            "url": "", 
+            "image": "scamp-images/6a2c783d95f67cde9148b9504483d3b9.jpg", 
+            "modified": "2011-07-08 16:13:07", 
+            "height": 1936, 
+            "width": 2592, 
+            "url_key": "6a2c783d95f67cde9148b9504483d3b9"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-08 16:12:15", 
+            "url": "", 
+            "image": "scamp-images/98c515ccf56ce0d20a25c49d86e93df5.jpg", 
+            "modified": "2011-07-08 16:12:16", 
+            "height": 768, 
+            "width": 1024, 
+            "url_key": "98c515ccf56ce0d20a25c49d86e93df5"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "scamp.image", 
+        "fields": {
+            "created": "2011-07-08 16:11:14", 
+            "url": "", 
+            "image": "scamp-images/309f458a2d93ae5f0e62f870372f003f.jpg", 
+            "modified": "2011-07-08 16:11:14", 
+            "height": 310, 
+            "width": 320, 
+            "url_key": "309f458a2d93ae5f0e62f870372f003f"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "scamp.annotation", 
+        "fields": {
+            "pos_x": "10.000", 
+            "pos_y": "10.000", 
+            "_text_rendered": "<p>This is a test annotation</p>", 
+            "created": "2011-07-11 17:30:08", 
+            "text": "This is a test annotation", 
+            "modified": "2011-07-11 17:30:08", 
+            "facing": 0, 
+            "scamp": 1, 
+            "order": 1
+        }
+    }
+]

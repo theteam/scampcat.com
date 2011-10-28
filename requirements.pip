@@ -1,0 +1,33 @@
+# Base stuff
+PIL
+Django
+fabric
+simplejson
+south
+requests>=0.5.1
+-e git+git://github.com/robhudson/django-debug-toolbar.git#egg=django-debug-toolbar
+-e git+git://github.com/django-extensions/django-extensions.git#egg=django-extensions
+-e git+git://github.com/zacharyvoase/django-qmanager.git#egg=django-qmanager
+-e git+git://github.com/SmileyChris/easy-thumbnails.git#egg=easy_thumbnails
+-e git+git://github.com/carljm/django-markitup.git#egg=django-markitup
+markdown>=2.0.3
+-e git+git://github.com/omab/django-social-auth.git#egg=django-social-auth
+python-memcached>=1.4.7
+django-taggit
+-e git+git://github.com/mozilla/django-piston.git#egg=django-piston
+django-pagination
+
+# Monitoring packages
+django-sentry
+
+# AWS packages
+-e hg+https://bitbucket.org/david/django-storages#egg=django-storages
+-e git+git://github.com/boto/boto.git#egg=boto
+-e git+git://github.com/sunlightlabs/django-mediasync.git#egg=django-mediasync
+
+# Continuous Integration and testing
+nose
+django-nose
+coverage
+pep8
+-e git+git://github.com/kmmbvnr/django-jenkins.git#egg=django-jenkins

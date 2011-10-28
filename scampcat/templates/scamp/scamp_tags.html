@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+Tagging: {{ object }}
+<form method="post" action=".">
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+  {% csrf_token %}
+</form>
+{% endblock %}

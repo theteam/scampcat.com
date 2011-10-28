@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% load thumbnail pagination_tags %}
+
+{% block body_classes %}single{% endblock %}
+
+{% block content %}
+
+    <h1>Are you sure you want to delete it?</h1>
+
+    <div class="confirm-deletion">
+        <img src="{% thumbnail object.image.image 200x200 %}" alt="{{ object.title }}" />
+        <p>Deletions are <strong>permanent</strong> and therefore <strong>irreversible</strong>. Please think carefully before clicking the red button below.</p>
+        {% if object.annotations.all.count %}
+            <p>The <strong>{{ object.annotations.all.count }}</strong> attached annotation{{ object.annotations.all.count|pluralize }} will also be permanently deleted.</p>
+        {% endif %}
+        <div class="controls">
+            <form action="{% url scamp_delete object.slug %}"} method="POST">
+                {% csrf_token %}
+                <button type="submit" class="custom danger">Delete</button>
+                <a href="{% url scamp_detail object.slug %}" class="custom">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

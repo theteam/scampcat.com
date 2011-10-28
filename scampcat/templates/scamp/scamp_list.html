@@ -1,0 +1,46 @@
+{% extends "base.html" %}{% load thumbnail pagination_tags %}
+
+{% block content %}
+
+    {% block masthead %}
+    {# For headings on listing pages, or for user bits on profile listing. #}
+    {% endblock %}
+
+    {% if object_list %}
+        <ul class="listing">
+          {% autopaginate object_list %}
+          {% for object in object_list %}
+              <li class="scamp-summary">
+                <a href="{{ object.get_absolute_url }}">
+                  <img class="thumbnail" src="{% thumbnail object.image.image 180x180 crop %}" />
+                </a>
+                <div class="scamp-metadata">
+                    <a href="{{ object.get_absolute_url }}">
+                      <h3 class="scamp-name">
+                        {% if object.title %}{{ object.title }}{% else %}Scamp: {{ object.slug }}{% endif %}
+                      </h3>
+                    </a>
+                    <p>Modified on {{ object.modified }}</p>
+                    <p><strong>{{ object.annotations.all.count }}</strong> annotation{{ object.annotations.all.count|pluralize }} attached.</p>
+                    {% if object.description|length %}
+                        <p class="description">{{ object.description }}</p>
+                    {% endif %}
+                    {% if object.tags.all.count %}
+                        <ul class="tags">Tags:
+                          {% for tag in object.tags.all %}
+                              <li><a href="{% url scamp_tags tag.name %}">{{ tag.name }}</a></li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <a href="{% url scamp_delete object.slug %}" class="custom danger thin" title="Delete this Scamp">Delete</a>
+                </div>
+              </li>
+          {% endfor %}
+        </ul>
+
+        {% paginate %}
+    {% else %}
+        <p>It looks like you haven't added and scamps yet. Do you want to <a href="{% url homepage %}" role="button">add one</a> and start annotating it?</p>
+    {% endif %}
+
+{% endblock %}

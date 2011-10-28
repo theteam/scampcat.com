@@ -1,0 +1,5 @@
+{% extends "scamp/scamp_list.html" %}
+
+{% block masthead %}
+    <h2>Scamps tagged with: {% for tag in tag_list %}{{ tag }}{% endfor %}</h2>
+{% endblock %}

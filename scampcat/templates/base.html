@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]><html lang="en" class="ie-lte-8"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+	<meta charset="utf-8"/>
+    <title>{% block title %}ScampCat{% endblock %}</title>
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=7,chrome=1"/><![endif]-->
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="{{ STATIC_URL }}styles/jquery-ui-1.8.14.custom.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}styles/base.css">
+
+    <link type="text/plain" rel="author" href="/humans.txt" />
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Coustard' rel='stylesheet' type='text/css'>
+    <script>document.documentElement.className += ' js'</script>
+
+    {% block head_tracking %}
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-25738201-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+    {% endblock %}
+
+
+</head>
+<body class="{% block body_classes %}{% endblock %}">
+    
+    <header class="site-header">
+        {% if not request.path == '/' %}
+            <a href="/" class="scampcat-logo"><h1>ScampCat</h1></a>
+        {% endif %}
+        <div class="user-bar">
+        {% if request.user.is_authenticated %}
+            <a href="{% url accounts_profile request.user.username %}"><img class="avatar-thumbnail" src="{{ request.user.get_profile.avatar_url }}" />{{ request.user.username }}</a> | 
+            <a href="{% url logout %}">logout</a>
+        {% else  %}
+        <a href="{% url login %}?next={{ request.path }}">login using twitter</a>
+        {% endif %}
+        </div>
+	</header>
+
+	<div class="wrapper">
+
+        {% if messages %}
+            <ul id="messages" class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<div role="button" class="close">×</div></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>
+            {% block footer %}
+            {% endblock %}
+            <div class="legal">
+                &copy; <a href="http://theteam.co.uk" title="Creative Digital Agency London">theTeam</a> 2011 &bull; <a href="{% url privacy %}" title="Our Privacy Policy">Privacy</a> &bull; <a href="{% url terms %}" title="Our Term &amp; Conditions">Terms</a>.
+            </div>
+        </footer>
+	</div>
+
+	
+	{% block body_script %}
+		<script src="{{ STATIC_URL }}scripts/intro.js"></script>
+		<script src="{{ STATIC_URL }}scripts/jquery-1.6.2.js"></script>
+		<script src="{{ STATIC_URL }}scripts/jquery-ui-1.8.14.custom.js"></script>
+		<script src="{{ STATIC_URL }}scripts/EventEmitter.js"></script>
+		<script src="{{ STATIC_URL }}scripts/InlineEdit.js"></script>
+		<script src="{{ STATIC_URL }}scripts/Annotation.js"></script>
+		<script src="{{ STATIC_URL }}scripts/AnnotationList.js"></script>
+		<script src="{{ STATIC_URL }}scripts/MarkerView.js"></script>
+		<script src="{{ STATIC_URL }}scripts/Scamp.js"></script>
+		<script src="{{ STATIC_URL }}scripts/base.js"></script>
+	{% endblock %}
+</body>
+</html>

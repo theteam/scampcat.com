@@ -1,0 +1,12 @@
+{% extends "scamp/scamp_list.html" %}
+
+{% block masthead %}
+    <div class="listing-description">
+        <img src="{{ user.get_profile.avatar_url }}" class="avatar" />
+        <h1 class="username">{{ user.username }}</h1>
+        <div class="listing-summary">
+            {{ object_count }} public scamps.
+            {% if request.user.is_authenticated and user == request.user  %}<span class="liberate">Liberate your data: <a href="{% url liberate_format "json" %}">JSON</a> | <a href="{% url liberate_format "xml" %}">XML</a></span>{% endif %}
+        </div>
+    </div>
+{% endblock %}

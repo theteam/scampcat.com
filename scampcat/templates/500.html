@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error (500) | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Ooops, something went wrong; don't worry -  our cat engineers have been notified.</h1>
+    {% include "lolcat.html" %}
+{% endblock %}

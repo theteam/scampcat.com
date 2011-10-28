@@ -1,0 +1,115 @@
+{% extends "scamp/base.html" %}
+{% block body_classes %}wide{% endblock %}
+
+{% block title %}{% if object.title %}{{ object.title }}{% else %}A Scamp{% endif %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+	<div class="scamp clearfix">
+        <div class="scamp-bar clearfix">
+            <h1>
+                <span class="inline-edit title" data-edit-type="text" data-edit-type="text">
+                    {% if object.title %}
+                        {{ object.title }}
+                    {% else %}
+                        {% if editable and not object.is_locked %}
+                        Click to edit
+                        {% else %}
+                        Untitled
+                        {% endif %}
+                    {% endif %}
+                </span>
+            </h1>
+            <div class="controls">
+                {% if object.is_cloneable %}
+                    <form action="{% url scamp_clone object.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="custom go" title="Create an exact replica of this Scamp without touching the original.">Clone</button>
+                    </form>
+                {% endif %}
+                {% if user.is_authenticated and not object.user and editable %} 
+                {# If user is logged in & the scamp has no user attached yet is editable then the user can attach themselves (claim) #}
+                    <form action="{% url scamp_claim object.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="custom go" title="This Scamp is not currently linked to your account. Click this button to link the two.">Claim</button>
+                    </form>
+                {% endif %}
+
+                {% if editable %}
+                    <form action="{% url scamp_toggle_lock object.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if object.is_locked %}
+                            <button type="submit" class="custom warning" title="Click to re-allow editing of this Scamp.">Locked</button>
+                        {% else %}
+                            <button type="submit" class="custom success" title="Click to lock this Scamp so it can't be edited.">Editable</button>
+                        {% endif %}
+                    </form>
+                {% endif %}
+
+
+                <div class="input">
+                  <div class="input-prepend">
+                      <span class="add-on"><img class="link" src="{{ STATIC_URL }}images/icons/link.gif"></span>
+                    <input name="copy-link" size="16" readonly="readonly" type="text" value="{{ request.build_absolute_uri }}">
+                  </div>
+                </div>
+            </div>
+        </div>
+		<div class="marker-container">
+			<img src="{{ object.image.image.url }}" />
+			{% for annotation in object.annotations.all %}
+				<div class="annotation" style="top:{{ annotation.pos_y }}%;left:{{ annotation.pos_x }}%">
+					<div class="label-{{ annotation.facing }}"><span class="index">{{ annotation.order }}</span><div class="arrow"></div></div>
+				</div>
+			{% endfor %}
+		</div>
+        <div class="annotations">
+            <p>
+                <div class="description inline-edit" data-edit-type="textarea">
+                    {% if object.description.rendered %}{{ object.description.rendered|safe }}{% else %}{% if not object.is_locked %}Click to edit this description{% else %}No description{% endif %}.{% endif %}</div>
+            </p>
+			<ol class="annotation-list">
+				{% for annotation in object.annotations.all %}
+					<li class="annotation" data-edit-url="{% url annotation_detail object.slug annotation.id %}" data-id="{{ annotation.id }}">
+                        {# While the .order variable is trustworthy - there's no reason not to just use the forloop counter here for safety's sake. #}
+						<span class="index">{{ forloop.counter }}</span>
+						<div class="inline-edit annotation-text" data-edit-type="textarea">{{ annotation.text.rendered|safe }}</div>
+						{% if editable and not object.is_locked %}
+							<div class="delete custom" title="Delete">X</div>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ol>
+            {% if editable and not object.is_locked %}
+                <div class="add-annotation custom go" title="Add a new marker to the Scamp.">Add annotation</div>
+            {% endif %}
+        </div>
+	</div>
+{% endblock %}
+
+{% block footer %}
+    <div class="extra">
+        <form action="{% url scamp_report object.slug %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="custom warning thin">Report</button>
+        </form>
+        <a href="{% url scamp_delete object.slug %}" class="custom danger thin" title="Delete this Scamp">Delete</a>
+    </div>
+{% endblock%}
+
+{% block body_script %}
+	{{ block.super }}
+	{% if editable and not object.is_locked %}
+		<script>
+			(function() {
+                var description_markdown = '{{ object.description.raw|escapejs }}';
+				var annotation_markdowns = [
+						{% for annotation in object.annotations.all %}
+							'{{ annotation.text.raw|escapejs }}'{% if not loop.last %},{% endif %}
+						{% endfor %}
+					];
+					
+				new scampCat.Scamp('div.scamp', '', '{% url scamp_reorder object.slug %}', description_markdown, annotation_markdowns);
+			})();
+		</script>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,3 @@
+Content reported as innapropriate by {{ user }}.
+
+http://{{ site.domain }}{{ object.get_absolute_url}}
