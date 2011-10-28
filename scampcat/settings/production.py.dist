@@ -1,0 +1,44 @@
+# Production settings for scampcat.
+from scampcat.settings import *
+
+DATABASES = {
+    'default': {
+        'ENGINE': '',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+ADMINS = (
+)
+MANAGERS = ADMINS
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
+
+DEFAULT_FROM_EMAIL = ''
+SERVER_EMAIL = ''
+
+DEBUG = False
+CREATE_TEST_USER = False
+
+STATIC_ROOT = here('..', '..', '..', 'static')
+
+# Twitter
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
+
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
+AWS_S3_CUSTOM_DOMAIN = ''
+
+MEDIASYNC['AWS_KEY'] = AWS_ACCESS_KEY_ID
+MEDIASYNC['AWS_SECRET'] = AWS_SECRET_ACCESS_KEY
+
+
+# Report innappropiate behaviour to:
+SCAMP_MANAGER = ''
